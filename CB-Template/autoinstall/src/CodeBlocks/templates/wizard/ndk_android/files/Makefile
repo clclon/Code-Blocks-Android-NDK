@@ -32,6 +32,7 @@
 #    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #    SOFTWARE.
 
+
 # Variables PLATFORM* to Application.mk
 
 PLATFORM_ABI := $(SC_NDK_ABI)
@@ -47,6 +48,9 @@ DIR_NDKROOT  := $(SC_NDK_DIR)
 DIR_PROJECT  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 STR_BUILDTAG := $(filter-out $@,$(MAKECMDGOALS))
 STR_BUILDOPT :=
+
+include Application.mk
+include $(APP_BUILD_SCRIPT)
 
 ifeq ($(OS),Windows_NT)
 	DIR_CONFCBP  := $(shell dir *.cbp | findstr .cbp)
@@ -78,8 +82,7 @@ cleanall: setndk clean
 
 setndk:
 	@echo '==== SET C::B NDK -> $(SC_NDK_API) -> $(SC_NDK_ABI) -> active device: [ $(PLATFORM_ABI) ] ===='
-	@$(DIR_UTILS)/exec/cbp2ndk32.exe -t $(STR_BUILDTAG) -c $(DIR_CONFCBP) --api $(PLATFORM_API) --abi $(PLATFORM_ABI) --ndkopt $(PLATFORM_OPTIM)
--include $(PLATFORM_SCRIPT)
+	@$(DIR_UTILS)/exec/cbp2ndk32.exe -t $(STR_BUILDTAG) -c $(DIR_CONFCBP) --api $(PLATFORM_API) --abi $(PLATFORM_ABI) --ndkopt $(PLATFORM_OPTIM) -include $(PLATFORM_SCRIPT)
 
 buildndk:
 	@echo '==== Build $(STR_BUILDTAG) -> $(PLATFORM_ABI) platform -> $(SC_NDK_API) API ===='
@@ -92,13 +95,20 @@ clean:
 
 adbsetup:
 	@echo '==== ADB SETUP: [ $(PLATFORM_ABI) ] ===='
+ifeq ($(shell expr $(APP_BUILD_VERSION) \< 8), 1)
+	@echo '==== Version $(APP_BUILD_VERSION) needed clean binary header: [ $(PLATFORM_ABI)/$(LOCAL_MODULE) ] ===='
 	Cmd.exe /C $(DIR_UTILS)/exec/android-elf-cleaner32.exe $(DIR_PROJECT)libs\$(PLATFORM_ABI)\$(LOCAL_MODULE)
-	Cmd.exe /C adb.exe push $(DIR_PROJECT)libs\$(PLATFORM_ABI)\$(LOCAL_MODULE) /data/local/tmp/$(LOCAL_MODULE)
-	Cmd.exe /C adb.exe shell /system/bin/chmod 0777 /data/local/tmp/$(LOCAL_MODULE)
+endif
+	@Cmd.exe /C adb.exe push $(DIR_PROJECT)libs\$(PLATFORM_ABI)\$(LOCAL_MODULE) /data/local/tmp/$(LOCAL_MODULE)
+	@Cmd.exe /C adb.exe shell /system/bin/chmod 0777 /data/local/tmp/$(LOCAL_MODULE)
 
 adbexec:
 	@echo '==== ADB RUN: [ $(PLATFORM_ABI) ] ===='
+ifeq ($(shell expr $(APP_BUILD_VERSION) \< 7), 1)
 	@Cmd.exe /C adb.exe shell /data/local/tmp/$(LOCAL_MODULE) $(CBP2NDK_CMDLINE)
+else
+	@Cmd.exe /C adb.exe exec-out /data/local/tmp/$(LOCAL_MODULE) $(CBP2NDK_CMDLINE)
+endif
 
 adbdebug:
 	@echo '==== GDB Debug: [ $(PLATFORM_ABI) ] ===='
@@ -107,11 +117,15 @@ adbdebug:
 	@Cmd.exe /C adb.exe shell /system/bin/chmod 0777 /data/local/tmp/gdbserver
 
 rundebug:
-	@Cmd.exe /C DebugRemote.cmd
+	@Cmd.exe /C RunRemote.cmd
 
 buildscript:
 ifeq (,$(wildcard ./RunRemote.cmd))
+ifeq ($(shell expr $(APP_BUILD_VERSION) \< 7), 1)
 	@echo "adb.exe shell /data/local/tmp/$(LOCAL_MODULE) $(CBP2NDK_CMDLINE)" >RunRemote.cmd
+else
+	@echo "adb.exe exec-out /data/local/tmp/$(LOCAL_MODULE) $(CBP2NDK_CMDLINE)" >RunRemote.cmd
+endif
 endif
 ifeq (,$(wildcard ./DebugRemote.cmd))
 	@echo "adb.exe forward tcp:59999 tcp:59999" >DebugRemote.cmd
@@ -120,4 +134,3 @@ ifeq (,$(wildcard ./DebugRemote.cmd))
 endif
 
 .PHONY: clean all
-

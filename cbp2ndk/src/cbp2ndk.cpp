@@ -109,7 +109,7 @@ int main(int argc, const char *argv[])
                     parse_srclist(pcnf, opt);
                 }
         );
-		for (auto root :
+	for (auto root :
              tinyxml2::selection(
                 static_cast<const tinyxml2::XMLDocument&>(*doc),
                 "CodeBlocks_project_file/Project/Build/Target"

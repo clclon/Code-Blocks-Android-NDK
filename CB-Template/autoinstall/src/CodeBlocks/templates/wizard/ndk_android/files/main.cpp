@@ -13,8 +13,19 @@
     cbp2ndk: https://github.com/ClnViewer/Code-Blocks-Android-NDK/tree/master/cbp2ndk/
 
 */
+/*
+    DEBUG GDB test,
+    manual run gdb.exe and type:
+        set solib-search-path obj/local/armeabi-v7a
+        file obj/local/armeabi-v7a/hello_world
+        target remote localhost:59999
+        b test
+        c
+        n
+        q
+*/
 
-int main(void)
+int main()
 {
     int a = 18;
     int b = a;

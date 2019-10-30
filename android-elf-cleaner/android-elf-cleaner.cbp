@@ -13,8 +13,6 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add option="-std=c++17" />
-					<Add option="-Wall" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -24,16 +22,13 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="-Wall" />
-					<Add option="-std=c++17" />
-					<Add option="-m32" />
-				</Compiler>
-				<Linker>
-					<Add option="-s" />
+					<Add option="-flto" />
 					<Add option="-static-libstdc++" />
 					<Add option="-static-libgcc" />
 					<Add option="-static" />
-					<Add option="-m32" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
 				</Linker>
 				<ExtraCommands>
 					<Add after="upx.exe -9 ..\cbp2ndk\bin\Release\android-elf-cleaner.exe" />
@@ -44,8 +39,15 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++17" />
 			<Add option="-Wall" />
+			<Add option="-Wextra" />
+			<Add option="-pedantic" />
 			<Add option="-fexceptions" />
+			<Add option="-Wno-unknown-pragmas" />
+			<Add option="-fvisibility=hidden" />
+			<Add option="-fvisibility-inlines-hidden" />
+			<Add option="-m32" />
 		</Compiler>
 		<Unit filename="android-elf-cleaner.cpp" />
 		<Unit filename="mio.hpp" />
