@@ -69,7 +69,7 @@
 
 ### Источники:
 
-Скачать [cbp2ndk v.0.0.14.79/win32 (03.07.2019)](https://clnviewer.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip)  
+Скачать [cbp2ndk v.0.0.14.79/win32 (03.07.2019)](https://clclon.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip)  
 Перейти в директорию [cbp2ndk](https://github.com/ClnViewer/Code-Blocks-Android-NDK/tree/master/cbp2ndk)  
 Более подробно о формате и возможностях файла [Android.mk](https://developer.android.com/ndk/guides/android_mk)  
 

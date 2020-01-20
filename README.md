@@ -1,4 +1,4 @@
-[![HOWTO RU](https://img.shields.io/badge/HOWTO-DOC-brightgreen.svg?style=flat)](https://clnviewer.github.io/Code-Blocks-Android-NDK/)
+[![HOWTO RU](https://img.shields.io/badge/HOWTO-DOC-brightgreen.svg?style=flat)](https://clclon.github.io/Code-Blocks-Android-NDK/)
 [![C::B project template](https://img.shields.io/badge/CodeBlocks-template-brightgreen.svg?style=flat)](https://github.com/ClnViewer/Code-Blocks-Android-NDK/tree/master/CB-Template)
 [![License MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg?style=flat)](https://github.com/ClnViewer/Code-Blocks-Android-NDK/blob/master/LICENSE)
 
@@ -9,10 +9,10 @@
 
 # Code::Blocks Android NDK
 
-`Code::Blocks` + `Android NDK` project template [__HOWTO__](https://clnviewer.github.io/Code-Blocks-Android-NDK/)  
-`Code::Blocks Template` __auto installation__ [EN](https://clnviewer.github.io/Code-Blocks-Android-NDK/CBNDKAUTOINSTALL.EN.html) | [RU](https://clnviewer.github.io/Code-Blocks-Android-NDK/CBNDKAUTOINSTALL.RU.html) | [exe](https://clnviewer.github.io/Code-Blocks-Android-NDK/CodeBlocksNdkTemplate.exe)  
-`Code::Blocks Template utilities` __cbp2ndk__ [EN](https://clnviewer.github.io/Code-Blocks-Android-NDK/CBP2NDK.EN.html) | [RU](https://clnviewer.github.io/Code-Blocks-Android-NDK/CBP2NDK.RU.html) | [zip](https://clnviewer.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip)  
-`Code::Blocks Template utilities` [android-elf-cleaner](https://clnviewer.github.io/Code-Blocks-Android-NDK/) | [zip](https://clnviewer.github.io/Code-Blocks-Android-NDK/android-elf-cleaner.zip)  
+`Code::Blocks` + `Android NDK` project template [__HOWTO__](https://clclon.github.io/Code-Blocks-Android-NDK/)  
+`Code::Blocks Template` __auto installation__ [EN](https://clclon.github.io/Code-Blocks-Android-NDK/CBNDKAUTOINSTALL.EN.html) | [RU](https://clclon.github.io/Code-Blocks-Android-NDK/CBNDKAUTOINSTALL.RU.html) | [exe](https://clclon.github.io/Code-Blocks-Android-NDK/CodeBlocksNdkTemplate.exe)  
+`Code::Blocks Template utilities` __cbp2ndk__ [EN](https://clclon.github.io/Code-Blocks-Android-NDK/CBP2NDK.EN.html) | [RU](https://clclon.github.io/Code-Blocks-Android-NDK/CBP2NDK.RU.html) | [zip](https://clclon.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip)  
+`Code::Blocks Template utilities` [android-elf-cleaner](https://clclon.github.io/Code-Blocks-Android-NDK/) | [zip](https://clclon.github.io/Code-Blocks-Android-NDK/android-elf-cleaner.zip)  
 
 
 ### Support:

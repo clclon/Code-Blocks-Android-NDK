@@ -116,5 +116,5 @@ end;
 
 function GetADBAndroidViewer(): Boolean;
 begin
-  Result := idpDownloadFile('https://clnviewer.github.io/ADB-Android-Viewer/dist/Android-ADB-Viewer.msi', ExpandConstant('{tmp}\AndroidADBViewer.msi'));
+  Result := idpDownloadFile('https://clclon.github.io/Android-Remote-Viewer/doc/Android-Remote-Viewer.msi', ExpandConstant('{tmp}\AndroidADBViewer.msi'));
 end;

@@ -3,7 +3,7 @@
 
 ----------
 
-- Скачать инсталлятор `NDK C::B template` [CodeBlocksNdkTemplate v.0.0.14.79/win32 (03.07.2019)](https://clnviewer.github.io/Code-Blocks-Android-NDK/CodeBlocksNdkTemplate.exe)  
+- Скачать инсталлятор `NDK C::B template` [CodeBlocksNdkTemplate v.0.0.14.79/win32 (03.07.2019)](https://clclon.github.io/Code-Blocks-Android-NDK/CodeBlocksNdkTemplate.exe)  
 - Запустить инсталлятор и установить `NDK C::B template`  
 - Если вы не выбрали пункт "Overwrite C::B template configuration (v.17.12)" во время установки, вам необходимо прописать темплейт самомтоятельно в конфигурационном файле `Code::Blocks`.  
 - Отредактировать файл `config.script` и добавить темплейт в список используемых.  

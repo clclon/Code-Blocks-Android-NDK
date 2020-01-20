@@ -5,8 +5,8 @@
 ## Code::Blocks to Android NDK configuration converter
 
 
-Описание работы __cbp2ndk__ [EN](https://clnviewer.github.io/Code-Blocks-Android-NDK/CBP2NDK.EN.html) | [RU](https://clnviewer.github.io/Code-Blocks-Android-NDK/CBP2NDK.RU.html)  
-Скачать `Code::Blocks` to `Android NDK` [configuration converter](https://clnviewer.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip) v.0.0.14.79 (03.07.2019)  
+Описание работы __cbp2ndk__ [EN](https://clclon.github.io/Code-Blocks-Android-NDK/CBP2NDK.EN.html) | [RU](https://clclon.github.io/Code-Blocks-Android-NDK/CBP2NDK.RU.html)  
+Скачать `Code::Blocks` to `Android NDK` [configuration converter](https://clclon.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip) v.0.0.14.79 (03.07.2019)  
 
 
 ### Параметры командной строки:

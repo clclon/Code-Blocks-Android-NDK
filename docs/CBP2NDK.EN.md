@@ -67,7 +67,7 @@ Variables not included in this list will be saved with the values ​​and over
 
 ### Sources:
 
-Download [cbp2ndk v.0.0.14.79 / win32 (07/03/2019)](https://clnviewer.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip)  
+Download [cbp2ndk v.0.0.14.79 / win32 (07/03/2019)](https://clclon.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip)  
 See [cbp2ndk directory](https://github.com/ClnViewer/Code-Blocks-Android-NDK/tree/master/cbp2ndk)  
 Learn more about the format and capabilities of the file [Android.mk](https://developer.android.com/ndk/guides/android_mk)  
  

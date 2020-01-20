@@ -10,8 +10,8 @@
 
 ### Download
 
-`ADB Android Viewer` msi package, `Bender Rodriguez edition :)` [msi](https://clnviewer.github.io/ADB-Android-Viewer/dist/Android-ADB-Viewer.msi)  
-`ADB Android Viewer` single executable](https://clnviewer.github.io/ADB-Android-Viewer/dist/ADBViewer.exe) does not require installation, always ready to work, includes ADB  
+`ADB Android Viewer` msi package, `Bender Rodriguez edition :)` [msi](https://clclon.github.io/ADB-Android-Viewer/dist/Android-ADB-Viewer.msi)  
+`ADB Android Viewer` single executable](https://clclon.github.io/ADB-Android-Viewer/dist/ADBViewer.exe) does not require installation, always ready to work, includes ADB  
 
 
 ### ADB Viewer LUA script record
