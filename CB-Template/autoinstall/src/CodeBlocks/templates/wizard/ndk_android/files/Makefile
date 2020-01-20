@@ -2,8 +2,8 @@
 #    MIT License
 #
 #    Code::Blocks + Android NDK project template
-#    Copyright (c) 2016-2019 PS
-#    HOWTO: https://clnviewer.github.io/Code-Blocks-Android-NDK/
+#    Copyright (c) 2016-2020 PS
+#    HOWTO: https://clclon.github.io/Code-Blocks-Android-NDK/
 #
 #    - No root device!
 #    - Build Debug (NDK toolchain)
@@ -32,7 +32,6 @@
 #    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #    SOFTWARE.
 
-
 # Variables PLATFORM* to Application.mk
 
 PLATFORM_ABI := $(SC_NDK_ABI)
@@ -40,6 +39,24 @@ PLATFORM_API := $(SC_NDK_API)
 PLATFORM_STL := c++_static
 PLATFORM_SCRIPT := Android.mk
 PLATFORM_OPTIM  :=
+
+-include Application.mk
+ifneq ($(APP_BUILD_SCRIPT),)
+	PLATFORM_SCRIPT = $(APP_BUILD_SCRIPT)
+endif
+ifneq ($(APP_ABI),)
+	PLATFORM_ABI = $(APP_ABI)
+endif
+ifneq ($(APP_PLATFORM),)
+	PLATFORM_API = $(APP_PLATFORM)
+endif
+ifneq ($(APP_STL),)
+	PLATFORM_STL = $(APP_STL)
+endif
+ifneq ($(APP_OPTIM),)
+	PLATFORM_OPTIM = $(APP_OPTIM)
+endif
+-include $(PLATFORM_SCRIPT)
 
 # Variables local
 
@@ -49,17 +66,10 @@ DIR_PROJECT  := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 STR_BUILDTAG := $(filter-out $@,$(MAKECMDGOALS))
 STR_BUILDOPT :=
 
-include Application.mk
-include $(APP_BUILD_SCRIPT)
-
 ifeq ($(OS),Windows_NT)
 	DIR_CONFCBP  := $(shell dir *.cbp | findstr .cbp)
 else
 	DIR_CONFCBP  := $(shell find $("./") -name '*.cbp')
-endif
-
-ifneq ($(PLATFORM_ABI),all)
-	PLATFORM_ABI = armeabi-v7a
 endif
 
 ifneq ($(ANALIZE),)
@@ -73,12 +83,12 @@ else
 	STR_BUILDOPT += -j 4
 endif
 
-all: setndk buildndk
-Debug: setndk buildndk adbsetup adbdebug buildscript rundebug
-Release: setndk buildndk adbsetup adbexec buildscript
-cleanDebug: setndk clean
-cleanRelease: setndk clean
-cleanall: setndk clean
+all: setndk checkabi buildndk
+Debug: setndk checkabi buildndk adbsetup adbdebug buildscript rundebug
+Release: setndk checkabi buildndk adbsetup adbexec buildscript
+cleanDebug: setndk checkabi clean
+cleanRelease: setndk checkabi clean
+cleanall: setndk checkabi clean
 
 setndk:
 	@echo '==== SET C::B NDK -> $(SC_NDK_API) -> $(SC_NDK_ABI) -> active device: [ $(PLATFORM_ABI) ] ===='
@@ -94,7 +104,7 @@ clean:
 	@Cmd.exe /C adb.exe shell rm -f /data/local/tmp/$(LOCAL_MODULE)
 
 adbsetup:
-	@echo '==== ADB SETUP: [ $(PLATFORM_ABI) ] ===='
+	@echo '==== ADB SETUP: [ $(PLATFORM_ABI) ] [ $(LOCAL_MODULE) ] ===='
 ifeq ($(shell expr $(APP_BUILD_VERSION) \< 8), 1)
 	@echo '==== Version $(APP_BUILD_VERSION) needed clean binary header: [ $(PLATFORM_ABI)/$(LOCAL_MODULE) ] ===='
 	Cmd.exe /C $(DIR_UTILS)/exec/android-elf-cleaner32.exe $(DIR_PROJECT)libs\$(PLATFORM_ABI)\$(LOCAL_MODULE)
@@ -121,6 +131,7 @@ rundebug:
 
 buildscript:
 ifeq (,$(wildcard ./RunRemote.cmd))
+	@echo '==== CREATE RUN SCRIPT: [ $(PLATFORM_ABI) ] ===='
 ifeq ($(shell expr $(APP_BUILD_VERSION) \< 7), 1)
 	@echo "adb.exe shell /data/local/tmp/$(LOCAL_MODULE) $(CBP2NDK_CMDLINE)" >RunRemote.cmd
 else
@@ -128,9 +139,16 @@ else
 endif
 endif
 ifeq (,$(wildcard ./DebugRemote.cmd))
+	@echo '==== CREATE RUN REMOTE DEBUGGER SCRIPT: [ $(PLATFORM_ABI) ] ===='
 	@echo "adb.exe forward tcp:59999 tcp:59999" >DebugRemote.cmd
 	@echo "start \"$(PLATFORM_ABI) GDB server\" /MIN adb.exe shell /data/local/tmp/gdbserver :59999 /data/local/tmp/$(LOCAL_MODULE) $(CBP2NDK_CMDLINE)" >>DebugRemote.cmd
 	@echo "exit" >>DebugRemote.cmd
 endif
+
+checkabi:
+ifeq ($(PLATFORM_ABI),all)
+	$(error Bad Android PLATFORM ABI, not run in 'all' value. Set 'APP_ABI' in file Application.mk)
+endif
+
 
 .PHONY: clean all
