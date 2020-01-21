@@ -221,7 +221,7 @@
 Страница [инсталлятора](CBNDKAUTOINSTALL.RU.md) `NDK C::B template`  
 
 - Скачать инсталлятор `NDK C::B template` [CodeBlocksNdkTemplate v.0.0.14.79/win32 (03.07.2019)](https://clclon.github.io/Code-Blocks-Android-NDK/CodeBlocksNdkTemplate.exe)  
-- Скачать утилиту конвертации настроек [cbp2ndk v.0.0.14.79/win32 (03.07.2019)](https://clclon.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip)  
+- Скачать утилиту конвертации настроек [cbp2ndk v.0.0.14.79/win32 (03.07.2019)](https://clclon.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip) [cbp2ndk v.0.0.14.79 / win32 (07/02/2020)](https://clclon.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip) [cbp2ndk build dynamic library](https://clclon.github.io/Code-Blocks-Android-NDK/cbp2ndkLinkedLib.zip)  
 - Скачать утилиту очистки бинарного файла `armeabi-v7a` [android-elf-cleaner v.0.0.14.79/win32 (03.07.2019)](https://clclon.github.io/Code-Blocks-Android-NDK/android-elf-cleaner.zip)  
 
 

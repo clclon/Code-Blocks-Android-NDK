@@ -7,50 +7,85 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="../cbp2ndk/bin/Debug/android-elf-cleaner" prefix_auto="1" extension_auto="1" />
-				<Option object_output="../cbp2ndk/obj/Debug/" />
+				<Option output="bin/Debug/android-elf-cleaner64d" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
 			</Target>
-			<Target title="Release">
-				<Option output="../cbp2ndk/bin/Release/android-elf-cleaner" prefix_auto="1" extension_auto="1" />
-				<Option object_output="../cbp2ndk/obj/Release/" />
+			<Target title="Release64">
+				<Option output="bin/Release/android-elf-cleaner64" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release64/" />
 				<Option type="1" />
-				<Option compiler="gcc" />
+				<Option compiler="gnu_gcc_compiler64" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="-flto" />
-					<Add option="-static-libstdc++" />
-					<Add option="-static-libgcc" />
-					<Add option="-static" />
+					<Add option="-m64" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+					<Add option="-static" />
 				</Linker>
 				<ExtraCommands>
-					<Add after="upx.exe -9 ..\cbp2ndk\bin\Release\android-elf-cleaner.exe" />
-					<Add after="C:\__Bin\7Zip\7z a -mx9 -tzip ..\docs\android-elf-cleaner.zip ..\cbp2ndk\bin\Release\android-elf-cleaner.exe" />
-					<Add after="cmd.exe /C copy ..\cbp2ndk\bin\Release\android-elf-cleaner.exe ..\CB-Template\autoinstall\src\CodeBlocks\templates\wizard\ndk_android\exec\android-elf-cleaner32.exe" />
+					<Add after="upx.exe -9 bin\Release\android-elf-cleaner64.exe" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="Release32">
+				<Option output="bin/Release/android-elf-cleaner32" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release32/" />
+				<Option type="1" />
+				<Option compiler="gnu_gcc_compiler32" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-m32" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-static-libstdc++" />
+					<Add option="-static-libgcc" />
+					<Add option="-static" />
+					<Add option="-m32" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="upx.exe -9 bin\Release\android-elf-cleaner32.exe" />
+					<Mode after="always" />
+				</ExtraCommands>
+			</Target>
+			<Target title="Install">
+				<Option type="4" />
+				<Option compiler="gcc" />
+				<ExtraCommands>
+					<Add after="E:\__Bin64\7Zip\7z a -mx9 -tzip ..\docs\android-elf-cleaner.zip bin\Release\android-elf-cleaner64.exe bin\Release\android-elf-cleaner32.exe" />
 					<Mode after="always" />
 				</ExtraCommands>
 			</Target>
 		</Build>
+		<VirtualTargets>
+			<Add alias="Release" targets="Release64;Release32;Install;" />
+		</VirtualTargets>
 		<Compiler>
-			<Add option="-std=c++17" />
 			<Add option="-Wall" />
-			<Add option="-Wextra" />
-			<Add option="-pedantic" />
+			<Add option="-std=c++17" />
 			<Add option="-fexceptions" />
 			<Add option="-Wno-unknown-pragmas" />
 			<Add option="-fvisibility=hidden" />
 			<Add option="-fvisibility-inlines-hidden" />
-			<Add option="-m32" />
 		</Compiler>
-		<Unit filename="android-elf-cleaner.cpp" />
-		<Unit filename="mio.hpp" />
+		<Unit filename="android-elf-cleaner.cpp">
+			<Option target="Debug" />
+			<Option target="Release64" />
+			<Option target="Release32" />
+		</Unit>
+		<Unit filename="mio.hpp">
+			<Option target="Debug" />
+			<Option target="Release64" />
+			<Option target="Release32" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
