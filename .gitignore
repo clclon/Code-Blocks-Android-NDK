@@ -65,3 +65,5 @@ dkms.conf
 /cbp2ndk/obj/Debug/src
 /cbp2ndk/obj/Release/src
 /docs/img/pspbrwse.jbf
+obj
+bin
