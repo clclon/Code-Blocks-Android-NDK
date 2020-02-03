@@ -68,7 +68,7 @@ STR_BUILDTAG := $(filter-out $@,$(MAKECMDGOALS))
 STR_BUILDOPT :=
 
 ifeq ($(OS),Windows_NT)
-	DIR_CONFCBP  := $(shell dir *.cbp | findstr .cbp)
+	DIR_CONFCBP  := $(shell dir /B *.cbp | findstr .cbp)
 	ifeq ($(PROCESSOR_ARCHITECTURE),AMD64)
 		BIN_BIT = 64
 	endif
