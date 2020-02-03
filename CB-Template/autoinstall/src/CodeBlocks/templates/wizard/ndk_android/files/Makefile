@@ -131,6 +131,7 @@ endif
 
 adbexec:
 	@echo '==== ADB RUN: [ $(PLATFORM_ABI) ] ===='
+	@readelf -d $(DIR_PROJECT)libs\$(PLATFORM_ABI)\$(LOCAL_MODULE)
 ifeq ($(shell expr $(APP_BUILD_VERSION) \< 7), 1)
 	@Cmd.exe /C adb.exe shell /data/local/tmp/$(LOCAL_MODULE) $(CBP2NDK_CMDLINE)
 else

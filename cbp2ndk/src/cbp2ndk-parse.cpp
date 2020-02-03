@@ -133,14 +133,15 @@ void parse_ldflag(CbConf *pcnf, std::string & opt)
 
 void parse_srclist(CbConf *pcnf, std::string & opt)
 {
+    size_t sp;
+    //
     if (
         (string_end(opt, ".h"))   ||
         (string_end(opt, ".hxx")) ||
         (string_end(opt, ".hpp"))
        )
     {
-        size_t sp;
-        if ((sp = opt.find_last_of("/\\")) != std::wstring::npos)
+        if ((sp = opt.find_last_of("/\\")) != std::string::npos)
         {
             std::string incpath = opt.substr(0, sp);
             if (!incpath.empty())
@@ -161,8 +162,7 @@ void parse_srclist(CbConf *pcnf, std::string & opt)
     {
         if (!string_end(opt, ".c"))
         {
-            size_t sp;
-            if ((sp = opt.find_last_of(".")) != std::wstring::npos)
+            if ((sp = opt.find_last_of(".")) != std::string::npos)
             {
                 std::string ext = opt.substr(sp, opt.length() - sp);
                 if (!ext.empty())
@@ -174,7 +174,15 @@ void parse_srclist(CbConf *pcnf, std::string & opt)
                 }
             }
         }
-        pcnf->v[elabels::LBL_CSRC].push_back(opt);
+        // deduction NEON source :)
+        if ((sp = opt.find("neon")) != std::string::npos)
+        {
+            std::string s(opt);
+            s += ".neon";
+            pcnf->v[elabels::LBL_CSRC].push_back(s);
+        }
+        else
+            pcnf->v[elabels::LBL_CSRC].push_back(opt);
     }
     else
         if (pcnf->isverb)
