@@ -39,6 +39,7 @@ PLATFORM_API := $(SC_NDK_API)
 PLATFORM_STL := c++_static
 PLATFORM_SCRIPT := Android.mk
 PLATFORM_OPTIM  :=
+BIN_BIT :=
 
 -include Application.mk
 ifneq ($(APP_BUILD_SCRIPT),)
@@ -68,8 +69,15 @@ STR_BUILDOPT :=
 
 ifeq ($(OS),Windows_NT)
 	DIR_CONFCBP  := $(shell dir *.cbp | findstr .cbp)
+	ifeq ($(PROCESSOR_ARCHITECTURE),AMD64)
+		BIN_BIT = 64
+	endif
+	ifeq ($(PROCESSOR_ARCHITECTURE),x86)
+		BIN_BIT = 32
+	endif
 else
 	DIR_CONFCBP  := $(shell find $("./") -name '*.cbp')
+	BIN_BIT = 32
 endif
 
 ifneq ($(ANALIZE),)
@@ -92,7 +100,11 @@ cleanall: setndk checkabi clean
 
 setndk:
 	@echo '==== SET C::B NDK -> $(SC_NDK_API) -> $(SC_NDK_ABI) -> active device: [ $(PLATFORM_ABI) ] ===='
+ifeq ($(BIN_BIT),64)
+	@$(DIR_UTILS)/exec/cbp2ndk64.exe -t $(STR_BUILDTAG) -c $(DIR_CONFCBP) --api $(PLATFORM_API) --abi $(PLATFORM_ABI) --ndkopt $(PLATFORM_OPTIM) -include $(PLATFORM_SCRIPT)
+else
 	@$(DIR_UTILS)/exec/cbp2ndk32.exe -t $(STR_BUILDTAG) -c $(DIR_CONFCBP) --api $(PLATFORM_API) --abi $(PLATFORM_ABI) --ndkopt $(PLATFORM_OPTIM) -include $(PLATFORM_SCRIPT)
+endif
 
 buildndk:
 	@echo '==== Build $(STR_BUILDTAG) -> $(PLATFORM_ABI) platform -> $(SC_NDK_API) API ===='
@@ -107,7 +119,11 @@ adbsetup:
 	@echo '==== ADB SETUP: [ $(PLATFORM_ABI) ] [ $(LOCAL_MODULE) ] ===='
 ifeq ($(shell expr $(APP_BUILD_VERSION) \< 8), 1)
 	@echo '==== Version $(APP_BUILD_VERSION) needed clean binary header: [ $(PLATFORM_ABI)/$(LOCAL_MODULE) ] ===='
-	Cmd.exe /C $(DIR_UTILS)/exec/android-elf-cleaner32.exe $(DIR_PROJECT)libs\$(PLATFORM_ABI)\$(LOCAL_MODULE)
+ifeq ($(BIN_BIT),64)
+	@Cmd.exe /C $(DIR_UTILS)/exec/android-elf-cleaner64.exe $(DIR_PROJECT)libs\$(PLATFORM_ABI)\$(LOCAL_MODULE)
+else
+	@Cmd.exe /C $(DIR_UTILS)/exec/android-elf-cleaner32.exe $(DIR_PROJECT)libs\$(PLATFORM_ABI)\$(LOCAL_MODULE)
+endif
 endif
 	@Cmd.exe /C adb.exe push $(DIR_PROJECT)libs\$(PLATFORM_ABI)\$(LOCAL_MODULE) /data/local/tmp/$(LOCAL_MODULE)
 	@Cmd.exe /C adb.exe shell /system/bin/chmod 0777 /data/local/tmp/$(LOCAL_MODULE)

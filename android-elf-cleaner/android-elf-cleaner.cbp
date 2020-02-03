@@ -60,6 +60,8 @@
 				<Option type="4" />
 				<Option compiler="gcc" />
 				<ExtraCommands>
+					<Add after="cmd.exe /C copy bin\Release\android-elf-cleaner64.exe ..\CB-Template\autoinstall\src\CodeBlocks\templates\wizard\ndk_android\exec\android-elf-cleaner64.exe" />
+					<Add after="cmd.exe /C copy bin\Release\android-elf-cleaner32.exe ..\CB-Template\autoinstall\src\CodeBlocks\templates\wizard\ndk_android\exec\android-elf-cleaner32.exe" />
 					<Add after="E:\__Bin64\7Zip\7z a -mx9 -tzip ..\docs\android-elf-cleaner.zip bin\Release\android-elf-cleaner64.exe bin\Release\android-elf-cleaner32.exe" />
 					<Mode after="always" />
 				</ExtraCommands>
