@@ -220,9 +220,9 @@
 Полный код `NDK C::B template` находиться в директории [C::B шаблон](https://github.com/ClnViewer/Code-Blocks-Android-NDK/tree/master/CB-Template/)  
 Страница [инсталлятора](CBNDKAUTOINSTALL.RU.md) `NDK C::B template`  
 
-- Скачать инсталлятор `NDK C::B template` [CodeBlocksNdkTemplate v.0.0.14.79/win32 (03.07.2019)](https://clclon.github.io/Code-Blocks-Android-NDK/CodeBlocksNdkTemplate.exe)  
-- Скачать утилиту конвертации настроек [cbp2ndk v.0.0.14.79/win32 (03.07.2019)](https://clclon.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip) [cbp2ndk v.0.0.14.79 / win32 (07/02/2020)](https://clclon.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip) [cbp2ndk build dynamic library](https://clclon.github.io/Code-Blocks-Android-NDK/cbp2ndkLinkedLib.zip)  
-- Скачать утилиту очистки бинарного файла `armeabi-v7a` [android-elf-cleaner v.0.0.14.79/win32 (03.07.2019)](https://clclon.github.io/Code-Blocks-Android-NDK/android-elf-cleaner.zip)  
+- Скачать инсталлятор `NDK C::B template` [CodeBlocksNdkTemplate v.0.0.3.15 /win32 /win64 (13.02.2020)](https://clclon.github.io/Code-Blocks-Android-NDK/CodeBlocksNdkTemplate.exe)  
+- Скачать утилиту конвертации настроек [cbp2ndk v.0.0.3.15 /win32 /win64 (13.02.2020)](https://clclon.github.io/Code-Blocks-Android-NDK/cbp2ndk.zip)  
+- Скачать утилиту очистки бинарного файла `armeabi-v7a` [android-elf-cleaner v.0.0.3.15 /win32 /win64 (13.02.2020)](https://clclon.github.io/Code-Blocks-Android-NDK/android-elf-cleaner.zip)  
 
 
 Обсуждение на [ru.stackoverflow.com](https://ru.stackoverflow.com/questions/972826/codeblocks-android-ndk/972896#972896)
