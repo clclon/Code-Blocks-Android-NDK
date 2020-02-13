@@ -39,7 +39,7 @@ int main(int argc, const char *argv[])
         exebin = ((exebin) ? (exebin + 1) : argv[0]);
 
         std::cout << std::endl << "   Code::Blocks to Android NDK configuration converter v." << CBP_FULLVERSION_STRING << " (" << CBP_DATE << "." << CBP_MONTH << "." << CBP_YEAR << ")" << std::endl;
-        std::cout << "   C::B to NDK HOWTO: https://clnviewer.github.io/Code-Blocks-Android-NDK/" << std::endl;
+        std::cout << "   C::B to NDK HOWTO: https://clclon.github.io/Code-Blocks-Android-NDK/" << std::endl;
         std::cout << "   Android.mk  HOWTO: https://developer.android.com/ndk/guides/android_mk" << std::endl << std::endl;
         std::cout << "   Options: " << std::endl;
         std::cout << "\t-a, --auto\tfind .cbp project file from current directory" << std::endl;
@@ -52,7 +52,9 @@ int main(int argc, const char *argv[])
         std::cout << "\t    --cbtmpl\tinstall C::B wizard template Makefile" << std::endl;
         std::cout << "\t    --api\tandroid API number (Application.mk)" << std::endl;
         std::cout << "\t    --abi\tandroid ABI platform (Application.mk)" << std::endl;
-        std::cout << "\t    --ndkopt\tandroid NDK options (Application.mk)" << std::endl << std::endl;
+        std::cout << "\t    --ndkopt\tandroid NDK options (Application.mk)" << std::endl;
+        std::cout << "\t    --noarm\tnot auto deduction ARM source" << std::endl;
+        std::cout << "\t    --noneon\tnot auto deduction NEON source" << std::endl << std::endl;
         std::cout << "   Using: " << std::endl;
         std::cout << "\t" << exebin << " <BuildTag> <path\\project.cbp>" << std::endl;
         std::cout << "\t" << exebin << " -t <BuildTag> -c <path\\project.cbp> -v" << std::endl;

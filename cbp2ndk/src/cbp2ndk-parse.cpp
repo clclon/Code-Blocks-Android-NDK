@@ -174,15 +174,40 @@ void parse_srclist(CbConf *pcnf, std::string & opt)
                 }
             }
         }
-        // deduction NEON source :)
-        if ((sp = opt.find("neon")) != std::string::npos)
+        // deduction ARM || NEON source :)
+        uint32_t f = ((opt.find(".arm") != std::string::npos) ?
+                        ((opt.find(".neon") != std::string::npos) ? 3 : 1) :
+                            ((opt.find(".neon") != std::string::npos) ? 2 : 0));
+        switch (f)
         {
-            std::string s(opt);
-            s += ".neon";
-            pcnf->v[elabels::LBL_CSRC].push_back(s);
+            case 1U:
+            case 2U:
+            case 3U:
+                {
+                    std::string s(opt);
+                    switch (f)
+                    {
+                        case 1: { if (pcnf->isarm)  s += ".arm"; break;  }
+                        case 2: { if (pcnf->isneon) s += ".neon"; break; }
+                        case 3:
+                            {
+                                if (pcnf->isarm)  s += ".arm";
+                                if (pcnf->isneon) s += ".neon";
+                                break;
+                            }
+                        default: break;
+                    }
+                    pcnf->v[elabels::LBL_CSRC].push_back(s);
+                    break;
+                }
+            case 0U:
+                {
+                    pcnf->v[elabels::LBL_CSRC].push_back(opt);
+                    break;
+                }
+            default:
+                break;
         }
-        else
-            pcnf->v[elabels::LBL_CSRC].push_back(opt);
     }
     else
         if (pcnf->isverb)

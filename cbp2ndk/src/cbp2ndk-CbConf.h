@@ -48,6 +48,8 @@ class CbConf
         bool isnodef;
         bool isabi;
         bool iscbtmpl;
+        bool isarm;
+        bool isneon;
         /// files found
         bool isapp;
         bool isand;

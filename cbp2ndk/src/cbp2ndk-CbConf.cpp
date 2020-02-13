@@ -32,6 +32,8 @@
 #define __CONF_API       "", "--api"
 #define __CONF_ABI       "", "--abi"
 #define __CONF_CBTMPL    "", "--cbtmpl"
+#define __CONF_DARM      "", "--noarm"
+#define __CONF_DNEON     "", "--noneon"
 #define __CONF_TAG       "-t", "--tag"
 #define __CONF_CBP       "-c", "--cbp"
 #define __CONF_AUTO      "-a", "--auto"
@@ -49,7 +51,8 @@ using namespace std;
 
 CbConf::CbConf(const char **argv, int argc)
     : isarg(false), isverb(false), isquiet(false), isdump(false), isnodef(false),
-      isabi(false), iscbtmpl(false), isapp(false), isand(false), ismkf(false)
+      isabi(false), iscbtmpl(false), isarm(true), isneon(true),
+      isapp(false), isand(false), ismkf(false)
     {
         cmdl(argv, argc);
         if (isarg)
@@ -101,6 +104,8 @@ void CbConf::cmdl(const char **argv, int argc)
             __CONF_OPT,
             __CONF_TAG,
             __CONF_CBP,
+            __CONF_DARM,
+            __CONF_DNEON,
             __CONF_DUMP,
             __CONF_AUTO,
             __CONF_QUIET,
@@ -110,17 +115,23 @@ void CbConf::cmdl(const char **argv, int argc)
 
     lcmd.parse(argc, argv);
 
-    bool isauto = (lcmd[{ __CONF_AUTO }]);
-    bool istag  = !(!(lcmd({ __CONF_TAG }) >> tag));
-    bool iscnf  = !(!(lcmd({ __CONF_CBP }) >> fname[0]));
-    bool isabi0 = !(!(lcmd({ __CONF_ABI }) >> abi[0]));
-    bool isabi1 = !(!(lcmd({ __CONF_API }) >> abi[1]));
+    bool isauto  = (lcmd[{ __CONF_AUTO }]);
+    bool istag   = !(!(lcmd({ __CONF_TAG }) >> tag));
+    bool iscnf   = !(!(lcmd({ __CONF_CBP }) >> fname[0]));
+    bool isabi0  = !(!(lcmd({ __CONF_ABI }) >> abi[0]));
+    bool isabi1  = !(!(lcmd({ __CONF_API }) >> abi[1]));
                       lcmd({ __CONF_OPT }) >> abi[2];
-    iscbtmpl    = (lcmd[{ __CONF_CBTMPL }]);
-    isdump      = (lcmd[{ __CONF_DUMP }]);
-    isquiet     = (lcmd[{ __CONF_QUIET }]);
-    isnodef     = (lcmd[{ __CONF_NODEFAULT }]);
-    isverb      = ((isquiet) ? false : (lcmd[{ __CONF_VERBOSE }]));
+    bool cnfarm  = (lcmd[{ __CONF_DARM }]);
+    bool cnfneon = (lcmd[{ __CONF_DNEON }]);
+    iscbtmpl     = (lcmd[{ __CONF_CBTMPL }]);
+    isdump       = (lcmd[{ __CONF_DUMP }]);
+    isquiet      = (lcmd[{ __CONF_QUIET }]);
+    isnodef      = (lcmd[{ __CONF_NODEFAULT }]);
+    isarm        = (lcmd[{ __CONF_DARM }]);
+    isneon       = (lcmd[{ __CONF_DNEON }]);
+    isverb       = ((isquiet) ? false : (lcmd[{ __CONF_VERBOSE }]));
+    isarm        = ((cnfarm) ? false : true);
+    isneon       = ((cnfneon) ? false : true);
 
     if (isauto)
         if ((iscnf = findcbp()))
